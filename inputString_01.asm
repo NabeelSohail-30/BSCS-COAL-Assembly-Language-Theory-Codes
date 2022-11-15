@@ -17,38 +17,39 @@
         mov ax, @data
         mov ds, ax
         
-        mov ah, 09h
+        mov ah, 09h     ;display msg
         lea dx, msg
         int 21h
 
-        mov ah, 0Ah
+        mov ah, 0Ah     ;input first name
         lea dx, firstName
         int 21h
 
-        mov ah, 09h
+        mov ah, 09h     ;display new line
         lea dx, NEWLINE
         int 21h
 
-        mov ah, 09h
+        mov ah, 09h     ;display msg2
         lea dx, msg2
         int 21h
 
-        mov ah, 0Ah
+        mov ah, 0Ah     ;input lastname
         lea dx, lastName
         int 21h
 
-        mov ah, 09h
+        mov ah, 09h     ;display new line
         lea dx, NEWLINE
         int 21h
-        mov ah, 09h
+        mov ah, 09h     ;display newline
         lea dx, NEWLINE
         int 21h
 
-        mov ah, 09h
+        mov ah, 09h     ;display msg3
         lea dx, msg3
         int 21h
 
-        mov bx, offset firstName
+        ;replacing . char with $ at the end of firstName
+        mov bx, offset firstName    
         mov cx, 0
         mov cl, [bx+1]
         mov si, offset firstName
@@ -56,14 +57,15 @@
         add si, cx
         mov [si], '$'
 
-        mov ah, 09h
-        lea dx, firstName+2
+        mov ah, 09h     ;display firstName
+        lea dx, firstName+2     ;move offset to the first char of str
         int 21h
 
-        mov dl, ' '
+        mov dl, ' '     ;display space b/w firstName and LastName
         mov ah, 02h
         int 21h
 
+        ;replacing . char with $ at the end of lastName
         mov bx, offset lastName
         mov cx, 0
         mov cl, [bx+1]
@@ -72,10 +74,10 @@
         add si, cx
         mov [si], '$'
 
-        mov ah, 09h
-        lea dx, lastName+2
+        mov ah, 09h     ;display lastName
+        lea dx, lastName+2  ;move offset to the first char of str
         int 21h
         
-        mov ax, 4c00h
+        mov ax, 4c00h   ;exit to dos
         int 21h
 end start
